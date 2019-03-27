@@ -1,0 +1,3 @@
+targets:
+  financial-balance: shared-us-west-2/cjtrhpmba4b3i0112n5vgv5nt
+  default: financial-balance
