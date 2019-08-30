@@ -1,33 +1,50 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { FaCog } from 'react-icons/fa'
 import {breakpoint, colors} from '../../config';
 
 const HeaderContainer = styled.div`
   background: ${colors.header.bg};
   color: ${colors.header.color};
-  padding: 15px;
-  display: flex;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   
   @media all and (min-width: ${breakpoint.MD}) {
     grid-row: 1 / span 2;
-  }
-  
-  h1 {
-    margin: 0;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 60px auto;
   }
 `;
 
 const Title = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
+  padding: 15px;
+  font-size: 1.2rem;
+  align-self: center;
+  justify-self: start;
+  
+  @media all and (min-width: ${breakpoint.MD}) {
+    justify-self: stretch;
+  }
+`;
+
+const Menu = styled.div`
+  padding: 15px;
+  align-self: center;
+  justify-self: end;
+  
+  @media all and (min-width: ${breakpoint.MD}) {
+    align-self: start;
+    justify-self: stretch;
+  }
 `;
 
 export const Header = () => {
   return (
     <HeaderContainer>
       <Title>Page Title</Title>
+      <Menu>
+        <FaCog/>
+      </Menu>
     </HeaderContainer>
   );
 };
