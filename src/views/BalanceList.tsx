@@ -1,25 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { breakpoint } from '../config';
 
 const List = styled.div<{}>`
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(1, 1fr);
   transition: .6s ease;
+  padding: 15px;
   
-  @media all and (min-width: 600px) {
+  @media all and (min-width: ${breakpoint.XS}) {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  @media all and (min-width: 900px) {
+  @media all and (min-width: ${breakpoint.SM}) {
     grid-template-columns: repeat(3, 1fr);
   }
   
-  @media all and (min-width: 1200px) {
+  @media all and (min-width: ${breakpoint.MD}) {
     grid-template-columns: repeat(4, 1fr);
   }
   
-  @media all and (min-width: 1600px) {
+  @media all and (min-width: ${breakpoint.LG}) {
     grid-template-columns: repeat(6, 1fr);
   }
 `;
