@@ -1,58 +1,48 @@
 type User @model {
-  # Required system field:
   id: ID! @isUnique # read-only (managed by Graphcool)
-
-  # Optional system fields (remove if not needed):
-  createdAt: DateTime! # read-only (managed by Graphcool)
-  updatedAt: DateTime! # read-only (managed by Graphcool)
+  createdAt: DateTime!
+  updatedAt: DateTime!
 
   name: String
   email: String @isUnique
   password: String
-
   balances: [Balance!]! @relation(name: "UserBalances")
+  guest: [Balance!]! @relation(name: "BalanceGuests")
+  categories: [Category!]! @relation(name: "UserCategories")
 }
 
-type Balance @model {
-  # Required system field:
-  id: ID! @isUnique # read-only (managed by Graphcool)
-
-  # Optional system fields (remove if not needed):
-  createdAt: DateTime! # read-only (managed by Graphcool)
-  updatedAt: DateTime! # read-only (managed by Graphcool)
-
-  author: User! @relation(name: "UserBalances")
+type Category @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
 
   name: String!
   color: String!
-  incomes: [Income]! @relation(name: "BalanceIncomes")
-  expenses: [Expense]! @relation(name: "BalanceExpenses")
+  date: String!
+  inputs: [Input]! @relation(name: "InputCategory")
 }
 
-type Income @model {
-  # Required system field:
-  id: ID! @isUnique # read-only (managed by Graphcool)
+type Balance @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
 
-  # Optional system fields (remove if not needed):
-  createdAt: DateTime! # read-only (managed by Graphcool)
-  updatedAt: DateTime! # read-only (managed by Graphcool)
-
+  author: User! @relation(name: "UserBalances")
+  guests: [User]! @relation(name: "BalanceGuests")
   name: String!
-  value: String!
-  balance: Balance! @relation(name: "BalanceIncomes")
+  initialBalance: String!
+  inputs: [Input]! @relation(name: "BalanceInputs")
 }
 
-type Expense @model {
-  # Required system field:
-  id: ID! @isUnique # read-only (managed by Graphcool)
+type Input @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
 
-  # Optional system fields (remove if not needed):
-  createdAt: DateTime! # read-only (managed by Graphcool)
-  updatedAt: DateTime! # read-only (managed by Graphcool)
-
-  name: String!
+  description: String!
   value: String!
-  balance: Balance! @relation(name: "BalanceExpenses")
+  category: Category! @relation(name: "InputCategory")
+  date: String!
+  balance: Balance! @relation(name: "BalanceInputs")
 }
-
 
